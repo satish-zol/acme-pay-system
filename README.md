@@ -6,6 +6,19 @@ A salary-management dashboard for HR, built with a PostgreSQL-backed Rails API a
 
 Prerequisites: Ruby 3.4+, Bundler, Node.js 20+, npm, and Docker with Compose.
 
+### Run the full stack in Docker
+
+Build and start PostgreSQL, the Rails API, and the frontend:
+
+```sh
+docker compose up --build -d
+docker compose exec backend bin/rails db:seed
+```
+
+Visit <http://localhost:5173>. The frontend container serves the production build and proxies API requests to Rails over the Compose network. Rails automatically prepares the database on startup; seed data is synthetic and safe to seed again. Use `docker compose logs -f` to follow service logs and `docker compose down` to stop the stack.
+
+### Run services on the host
+
 1. Start PostgreSQL from the project root:
 
    ```sh
